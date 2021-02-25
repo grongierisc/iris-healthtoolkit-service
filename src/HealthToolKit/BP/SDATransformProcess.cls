@@ -2,7 +2,7 @@
 /// To use this class, add a business process with this class to the production and configure the target. The default target will send the SDA to a component
 /// that converts the data to FHIR.
 /// 
-Class HealthToolKit.BP.SDAtoHL7TransformProcess Extends Ens.BusinessProcess [ ClassType = persistent ]
+Class HealthToolKit.BP.SDAtoHL7TransformProcess Extends (Ens.BusinessProcess, HS.HC.Util.Trace.Helper) [ ClassType = persistent ]
 {
 
 Parameter SETTINGS = "TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic";
@@ -19,7 +19,7 @@ Method OnRequest(pRequest As HS.Message.XMLMessage, Output pResponse As Ens.Resp
 	try {
 		 set tVDoc= ##class(EnsLib.EDI.XML.Document).ImportFromString(pRequest.ContentStream, .Status)
          set tSC = $classmethod(..TransformFile,"Transform",tVDoc,.tHL7) //##class(HS.Gateway.SDA3.SDA3ToHL7.ADTA0N).Transform(tVDoc,.tHL7)
-         set tSC = ..SendRequestSync(..TargetConfigName,tHL7,.pResponse)
+         //set tSC = ..SendRequestSync(..TargetConfigName,tHL7,.pResponse)
 		
 		#dim tHL7 as EnsLib.HL7.Message
 		Set tQuickStream = ##class(HS.SDA3.QuickStream).%New()
@@ -29,6 +29,8 @@ Method OnRequest(pRequest As HS.Message.XMLMessage, Output pResponse As Ens.Resp
 		
 		Set pResponse = ##class(HS.FHIRServer.Interop.Response).%New()
 		set pResponse.QuickStreamId = tQuickStream.%Id()
+
+		$$$HSTRACE("HL7 Payload", "HL7", tQuickStream.Read())
 
 	
 	} catch ex {
@@ -46,6 +48,9 @@ Storage Default
 </Value>
 <Value name="2">
 <Value>TransformFile</Value>
+</Value>
+<Value name="3">
+<Value>TraceOperations</Value>
 </Value>
 </Data>
 <DefaultData>HL7TransformProcessDefaultData</DefaultData>

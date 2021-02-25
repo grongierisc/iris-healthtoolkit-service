@@ -418,7 +418,11 @@ Method CreateAndSendInteropMessage(pFHIRObj As %Library.DynamicObject, pSchema A
 		
 		#dim tResponse As HS.FHIRServer.Interop.Response
 		
-		Set tSC = ..SendRequestSync(..TargetConfigName, tRequest, .tResponse)
+		//Set tSC = ..SendRequestSync(..TargetConfigName, tRequest, .tResponse)
+		Set tResponse = ##class(HS.FHIRServer.Interop.Response).%New()
+		set tResponse.CharSet = "UTF-8"
+		set tResponse.ContentType = "application/fhir+json"
+
 		If $$$ISERR(tSC) {
 			If ($IsObject($Get(tResponse)))&&(tResponse.QuickStreamId'="") {
 				Set tResponseQuickStream = ##class(HS.SDA3.QuickStream).%OpenId(tResponse.QuickStreamId)
