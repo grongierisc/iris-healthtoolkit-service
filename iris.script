@@ -1,0 +1,39 @@
+    zn "%SYS"
+    Do ##class(Security.Users).UnExpireUserPasswords("*")
+    
+    // Create web application ...
+    zw ##class(Security.Applications).Import("/opt/irisapp/misc/application-export.xml")
+
+    zn "HSLIB"
+    // Install a Foundation namespace and change to it
+    Do ##class(HS.HC.Util.Installer).InstallFoundation("HEALTHTOOLKIT")
+    zn "HEALTHTOOLKIT"
+
+    // Install FHIR repo
+    Set appKey = "/api/fhir"
+    Set strategyClass = "HS.FHIRServer.Storage.Json.InteractionsStrategy"
+    Set metadataConfigKey = "HL7v40"
+
+    // Install elements that are required for a FHIR-enabled namespace
+    Do ##class(HS.FHIRServer.Installer).InstallNamespace()
+
+    // Install an instance of a FHIR Service into the current namespace
+    Do ##class(HS.FHIRServer.Installer).InstallInstance(appKey, strategyClass, metadataConfigKey)
+    do ##class(Ens.Director).StopProduction()
+    do $system.OBJ.ImportDir("/opt/irisapp/src","*.cls","cdk",.errors,1)
+
+    zw $classmethod("Ens.Director", "SetAutoStart", "HEALTHTOOLKITPKG.FoundationProduction", 0)
+
+    set cspConfig = ##class(HS.Util.RESTCSPConfig).URLIndexOpen(appKey)
+    set cspConfig.ServiceConfigName = "FHIR_Http_Service"
+    set cspConfig.AllowUnauthenticatedAccess = 1
+    zw cspConfig.%Save()
+
+    set strategy = ##class(HS.FHIRServer.API.InteractionsStrategy).GetStrategyForEndpoint(appKey)
+    set config = strategy.GetServiceConfigData()
+    set config.DebugMode = 4
+    do strategy.SaveServiceConfigData(config)
+
+    do ##class(EnsLib.EDI.XML.SchemaXSD).Import("/opt/irisapp/misc/HS.SDA3.xsd",.tCatImported)
+
+halt

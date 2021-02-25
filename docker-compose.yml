@@ -1,0 +1,13 @@
+version: '3.6'
+services:
+  iris:
+    build: 
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    ports: 
+      - 32782:1972
+      - 32783:52773
+      - 32784:53773
+    volumes:
+      - ./:/irisdev/app
