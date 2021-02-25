@@ -12,3 +12,11 @@ POST http://localhost:32783/api/cda/
 
 FHIR repo
 http://localhost:32783/api/fhir
+
+TODO :
+- [ ] FHIR to HL7
+    - [ ] ORU
+    - [ ] VXN
+- [ ] README
+- [ ] VIDEO
+- [ ] CLEANUP Dirty work
