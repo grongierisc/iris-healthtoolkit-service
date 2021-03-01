@@ -9,7 +9,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <sequence xend='200' yend='600' >
 <if name='Transform ?' condition='request.Request.RequestPath [ "hl7"' xpos='200' ypos='250' xend='200' yend='500' >
 <true>
-<call name='To Transform' target='SDA_HL7' async='0' xpos='470' ypos='400' >
+<call name='To Transform' target='FHIR_SDA' async='0' xpos='470' ypos='400' >
 <request type='Ens.Request' >
 <assign property="callrequest" value="request" action="set" />
 </request>
