@@ -18,7 +18,8 @@ Method OnRequest(pRequest As HS.Message.XMLMessage, Output pResponse As Ens.Resp
 	set tSC = $$$OK
 	try {
 		 set tVDoc= ##class(EnsLib.EDI.XML.Document).ImportFromString(pRequest.ContentStream, .Status)
-         set tSC = $classmethod(..TransformFile,"Transform",tVDoc,.tHL7) //##class(HS.Gateway.SDA3.SDA3ToHL7.ADTA0N).Transform(tVDoc,.tHL7)
+		 set tTransform = $s($g(^HL7Transforme)'="":$g(^HL7Transforme),1:..TransformFile)
+         set tSC = $classmethod(tTransform,"Transform",tVDoc,.tHL7) //##class(HS.Gateway.SDA3.SDA3ToHL7.ADTA0N).Transform(tVDoc,.tHL7)
          //set tSC = ..SendRequestSync(..TargetConfigName,tHL7,.pResponse)
 		
 		#dim tHL7 as EnsLib.HL7.Message
