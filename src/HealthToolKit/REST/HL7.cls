@@ -10,7 +10,7 @@ Parameter HandleCorsRequest = 1;
 XData UrlMap [ XMLNamespace = "http://www.fhirhl7v2demo.com/urlmap" ]
 {
 <Routes>
-  <Route Url="/" Method="POST" Call="hl7" Cors="true"/>
+  <Route Url="/fhir" Method="POST" Call="hl7" Cors="true"/>
 </Routes>
 }
 

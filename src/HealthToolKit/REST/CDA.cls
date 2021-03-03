@@ -10,7 +10,7 @@ Parameter HandleCorsRequest = 1;
 XData UrlMap [ XMLNamespace = "http://www.fhirhl7v2demo.com/urlmap" ]
 {
 <Routes>
-  <Route Url="/" Method="POST" Call="cda" Cors="true"/>
+  <Route Url="/fhir" Method="POST" Call="cda" Cors="true"/>
 </Routes>
 }
 
@@ -36,7 +36,7 @@ ClassMethod cda() As %Status
 			Set %response.ContentType = ensResponse.ContentType
 			Set %response.CharSet = ensResponse.CharSet
 			Set outputQuickStream = ##class(HS.SDA3.QuickStream).%OpenId(ensResponse.QuickStreamId)
-			w outputQuickStream.Read()
+			d outputQuickStream.OutputToDevice()
 		
 		}
 
