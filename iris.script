@@ -36,4 +36,9 @@
 
     do ##class(EnsLib.EDI.XML.SchemaXSD).Import("/opt/irisapp/misc/HS.SDA3.xsd",.tCatImported)
 
+    ; zpm install openapi class definiton
+    zpm
+    install swagger-ui
+    q
+
 halt
