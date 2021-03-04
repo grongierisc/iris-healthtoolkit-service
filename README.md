@@ -95,5 +95,5 @@ GET http://localhost:32783/api/fhir/metadata
 
  - [ ] describe how it's working
  - [ ] find error with certificate
- - [ ] fix HL7v2 in swagger
+ - [x] fix HL7v2 in swagger
  - [ ] add IAM support
