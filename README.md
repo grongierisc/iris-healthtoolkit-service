@@ -7,7 +7,7 @@ Easy to use HL7v2 to FHIR,  CDA to FHIR, FHIR to HL7v2 as a Service.
 The aim of this project is to provide an REST API that can convert easily various health formats.
 Post the desire format in the REST body, get the answer in the new format.
 
-* Live demo : 
+* Live demo : https://vps-c8581874.vps.ovh.net/swagger-ui/index.html
 
 * Video : https://youtu.be/lr2B7zSFkds
 
@@ -94,3 +94,6 @@ GET http://localhost:32783/api/fhir/metadata
 ## TODO :
 
  - [ ] describe how it's working
+ - [ ] find error with certificate
+ - [ ] fix HL7v2 in swagger
+ - [ ] add IAM support
