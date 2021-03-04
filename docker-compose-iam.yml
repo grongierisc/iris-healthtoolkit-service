@@ -1,0 +1,97 @@
+version: '3.6'
+services:
+  iris:
+    build: 
+      context: .
+      dockerfile: dockerfile.iam
+    restart: always
+    ports: 
+      - 32782:1972
+      - 32783:52773
+      - 32784:53773
+    volumes:
+      - ./:/irisdev/app
+  iam-migrations:
+    image: intersystems/iam:1.5.0.9-4
+    command: kong migrations bootstrap
+    depends_on:
+      - db
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_DATABASE: ${KONG_PG_DATABASE:-iam}
+      KONG_PG_HOST: db
+      KONG_PG_PASSWORD: ${KONG_PG_PASSWORD:-iam}
+      KONG_PG_USER: ${KONG_PG_USER:-iam}
+      KONG_CASSANDRA_CONTACT_POINTS: db
+      ISC_IRIS_URL: IAM:SYS@iris:52773/api/iam/license
+    restart: on-failure
+    links:
+      - db:db
+  iam:
+    image: intersystems/iam:1.5.0.9-4
+    depends_on:
+      - db
+    environment:
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: '0.0.0.0:8001'
+      KONG_ANONYMOUS_REPORTS: 'off'
+      KONG_CASSANDRA_CONTACT_POINTS: db
+      KONG_DATABASE: postgres
+      KONG_PG_DATABASE: ${KONG_PG_DATABASE:-iam}
+      KONG_PG_HOST: db
+      KONG_PG_PASSWORD: ${KONG_PG_PASSWORD:-iam}
+      KONG_PG_USER: ${KONG_PG_USER:-iam}
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_PORTAL: 'on'
+      KONG_PORTAL_GUI_PROTOCOL: http
+      KONG_PORTAL_GUI_HOST: '127.0.0.1:8003'
+      KONG_ADMIN_GUI_URL: http://localhost:8002
+      ISC_IRIS_URL: IAM:SYS@iris:52773/api/iam/license
+    links:
+      - db:db
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+      - target: 8001
+        published: 8001
+        protocol: tcp
+      - target: 8002
+        published: 8002
+        protocol: tcp
+      - target: 8003
+        published: 8003
+        protocol: tcp
+      - target: 8004
+        published: 8004
+        protocol: tcp
+      - target: 8443
+        published: 8443
+        protocol: tcp
+      - target: 8444
+        published: 8444
+        protocol: tcp
+      - target: 8445
+        published: 8445
+        protocol: tcp
+    restart: on-failure
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: ${KONG_PG_DATABASE:-iam}
+      POSTGRES_PASSWORD: ${KONG_PG_PASSWORD:-iam}
+      POSTGRES_USER: ${KONG_PG_USER:-iam}
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${KONG_PG_USER:-iam}"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    restart: on-failure
+    stdin_open: true
+    tty: true
+volumes:
+  pgdata:

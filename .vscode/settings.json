@@ -13,8 +13,10 @@
         "service": "iris",
         "file": "docker-compose.yml",
         "internalPort": 52773
-      }
+      },
+      
     },
+    "objectscript.conn.superPort": 32782,
     "sqltools.connections": [
     
       {

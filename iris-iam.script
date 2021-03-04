@@ -1,0 +1,12 @@
+    zn "%SYS"
+    write "Create web application ...",!
+    set webName = "/api/iam"
+    set webProperties("Enabled") = 1
+    set status = ##class(Security.Applications).Modify(webName, .webProperties)
+    write:'status $system.Status.DisplayError(status)
+    write "Web application "_webName_" was updated!",!
+    set userProperties("Enabled") = 1
+    set userName = "IAM"
+    Do ##class(Security.Users).Modify(userName,.userProperties)
+    write "User "_userName_" was updated!",!
+    halt
