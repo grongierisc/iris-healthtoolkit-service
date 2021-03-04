@@ -4,7 +4,11 @@ services:
     build: 
       context: .
       dockerfile: dockerfile
+      args: 
+        - IRIS_PASSWORD=$IRIS_PASSWORD
     restart: always
+    env_file: 
+      - .env
     ports: 
       - 32782:1972
       - 32783:52773
