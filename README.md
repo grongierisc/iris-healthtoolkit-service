@@ -92,10 +92,12 @@ GET http://localhost:32783/api/fhir/metadata
 
 * VXU_V04
 
-## How it's works
+## How it's working
 
 This project works with the pivot diagram: SDA.
+
 The SDA (Summary Document Architecture) is the InterSystems Clinical Data Format. 
+
 The SDA <-> FHIR correspondences can be consulted [here](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/Doc.View.cls?KEY=HXFHIR_transforms), and those of the CDA -> SDA [here](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/DocBook.UI.Page.cls?KEY=HXCDA).
 
 ![gif sda pivot](https://raw.githubusercontent.com/grongierisc/iris-healthtoolkit-service/main/misc/images/Gif_SDA_Pivot.gif)
