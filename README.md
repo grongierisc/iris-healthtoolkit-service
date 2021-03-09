@@ -1,75 +1,105 @@
-# iris-healthtoolkit-service
-Convert HL7 to FHIR,  CDA to FHIR, FHIR to HL7 as a Service
+# Iris Healthtoolkit Service
 
-HL7 to FHIR
-POST http://localhost:32783/api/hl7/
+[![Video](https://raw.githubusercontent.com/grongierisc/iris-healthtoolkit-service/main/misc/images/Cover.png)](https://youtu.be/lr2B7zSFkds "Video")
 
-FHIR to HL7
-POST http://localhost:32783/api/fhir/hl7
+Easy to use HL7v2 to FHIR,  CDA to FHIR, FHIR to HL7v2 as a Service.
 
-CDA to FHIR
-POST http://localhost:32783/api/cda/
+The aim of this project is to provide an REST API that can convert easily various health formats.
+Post the desire format in the REST body, get the answer in the new format.
 
-FHIR repo
-http://localhost:32783/api/fhir
+* :fire: Live demo : https://vps-c8581874.vps.ovh.net/swagger-ui/index.html :fire:
 
-TODO :
-- [ ] FHIR to HL7
-    - [ ] ORU
-    - [ ] VXN
-- [ ] README
-- [ ] VIDEO
-- [ ] CLEANUP Dirty work
-- [ ] Explain SDA pivot
+* :tv: Video : https://youtu.be/lr2B7zSFkds :tv:
 
-Video :
+## Install
 
-FHIR et IRIS le voyageur dans le temps.
+Clone this repository
 
-Bonjour, C'est Guillaume d'InterSystems.
-Aujourd'hui j'ai 88 secondes pour vous parler du FHIR et du voyage dans le temps.
-Le FHIR pour Fast Healthcare Interoperability Resources.
-Inventé en 2011 par l'organiseme HL7 et sortie en version finale en 2019.
-A ne pas confondre avec HL7v2 inventé en 1989.
-Si on fesait une analogie de ces protocoles de santé avec les réseaux sociaux
-Cela donnerait :
-Le FHIR est à TikTok
-Ce que l'HL7v2 est au minitel
+```
+git clone https://github.com/grongierisc/iris-healthtoolkit-service.git
+```
 
-Le moins que l'on puisse dire, c'est qu'il y a un écart générationelle entre les deux.
-Comme toute communauté, 
-faire du FHIR avec du FHIR 
-c'est aussi simple que faire de 
-HL7v2 avec de HL7v2.
+Docker
 
-Et que se passe t il si on fait communiquer les deux ?
-Pour commencer les formats sont pas les memes.
-L'HL7v2 est sous forme de fichier plat.
-Le FHIR est généralement proposé sous forme de JSON.
-Maintenant, il nous reste à mapper les champs d'un format à l'autre.
-C'est long, compliqué et source d'erreur.
+```
+docker-compose up --build -d
+```
 
-Et si on avait une machine à voyager dans le temps ?
-Une machine qui fesait la passerelle entre 1989 et 2019 ?
+## Usage
 
-C'est ce que je vous propose avec IRIS For Health.
-Vous ne me coyer pas ?
+* Go to : http://localhost:32783/swagger-ui/index.html
 
-Rendez-vous sur GitHub :
-https://github.com/grongierisc/iris-healthtoolkit-service
+## Api details
 
-Ici vous y trouverez une demo clé en main.
+* HL7 to FHIR
+```
+POST http://localhost:32783/api/hl7/fhir
+```
 
-Envoyer sur cette api (/api/fhir/hl7/adt) du bundle FHIR et en sortie vous aurez de l'HL7v2 ADT
-Envoyer ici (/api/hl7/fhir) une ADT HL7v2 vous aurez en sortie du bundle FHIR
+* FHIR to HL7 ADT
+```
+POST http://localhost:32783/api/fhir/hl7/adt
+```
 
-N'hesitez pas à venir nous voir sur intersystems.com ou sur le salon pour en apprendre plus sur IRIS for Health et d'autres sujets comme le NLP, l'AutoML, notre DPI, le serveur FHIR, l'analystics, les bases de données, l'intéropérabilité, le devops, ...
+* FHIR to HL7 ORU
+```
+POST http://localhost:32783/api/fhir/hl7/oru
+```
 
+* FHIR to HL7 vxu
+```
+POST http://localhost:32783/api/fhir/hl7/vxu
+```
 
+* CDA to FHIR
+```
+POST http://localhost:32783/api/cda/fhir
+```
+
+* FHIR repo
+```
+GET http://localhost:32783/api/fhir/metadata
+```
+
+## Supported HL7 inbound format :
+
+* ADT_A01, ADT_A02, ADT_A03, ADT_A04, ADT_A05, ADT_A06, ADT_A07, ADT_A08, ADT_A09, ADT_A10, ADT_A11, ADT_A12, ADT_A13, ADT_A17, ADT_A18, ADT_A23, ADT_A25, ADT_A27, ADT_A28, ADT_A29, ADT_A30, ADT_A31, ADT_A34, ADT_A36, ADT_A39, ADT_A40, ADT_A41, ADT_A45, ADT_A47, ADT_A49, ADT_A50, ADT_A51, ADT_A60
 
 
-C'est là qu'arrive notre notion de voyage dans le temps.
-Comment faire communiquer ces deux mondes ?
+* BAR_P12
 
+
+* MDM_T02, MDM_T04, MDM_T08, MDM_T11
+
+
+* OMP_O09
+
+
+* ORM_O01
+
+
+* ORU_R01
+
+
+* PPR_PC1, PPR_PC2, PPR_PC3
+
+
+* RDE_O11
+
+
+* SIU_S12, SIU_S13, SIU_S14, SIU_S15, SIU_S16, SIU_S17, SIU_S26
+
+
+* VXU_V04
+
+## How it's working
+
+This project works with the pivot diagram: SDA.
+
+The SDA (Summary Document Architecture) is the InterSystems Clinical Data Format. 
+
+The SDA <-> FHIR correspondences can be consulted [here](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/Doc.View.cls?KEY=HXFHIR_transforms), and those of the CDA -> SDA [here](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/DocBook.UI.Page.cls?KEY=HXCDA).
+
+![gif sda pivot](https://raw.githubusercontent.com/grongierisc/iris-healthtoolkit-service/main/misc/images/Gif_SDA_Pivot.gif)
 
 
