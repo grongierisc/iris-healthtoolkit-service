@@ -1,6 +1,7 @@
 version: '3.6'
 services:
   iris:
+    image: iris-healthtoolkit-iam
     build: 
       context: .
       dockerfile: dockerfile.iam
@@ -13,7 +14,7 @@ services:
       - ./:/irisdev/app
   iam-migrations:
     image: intersystems/iam:1.5.0.9-4
-    command: kong migrations bootstrap
+    command: kong migrations bootstrap up
     depends_on:
       - db
     environment:
@@ -23,7 +24,7 @@ services:
       KONG_PG_PASSWORD: ${KONG_PG_PASSWORD:-iam}
       KONG_PG_USER: ${KONG_PG_USER:-iam}
       KONG_CASSANDRA_CONTACT_POINTS: db
-      ISC_IRIS_URL: IAM:SYS@iris:52773/api/iam/license
+      ISC_IRIS_URL: IAM:$IRIS_PASSWORD@iris:52773/api/iam/license
     restart: on-failure
     links:
       - db:db
@@ -48,7 +49,10 @@ services:
       KONG_PORTAL_GUI_PROTOCOL: http
       KONG_PORTAL_GUI_HOST: '127.0.0.1:8003'
       KONG_ADMIN_GUI_URL: http://localhost:8002
-      ISC_IRIS_URL: IAM:SYS@iris:52773/api/iam/license
+      KONG_ENFORCE_RBAC: 'on'
+      KONG_ADMIN_GUI_AUTH: 'basic-auth'
+      KONG_ADMIN_GUI_SESSION_CONF: '{"secret":"$IRIS_PASSWORD","storage":"kong","cookie_secure":false}'
+      ISC_IRIS_URL: IAM:$IRIS_PASSWORD@iris:52773/api/iam/license
     links:
       - db:db
     ports:
