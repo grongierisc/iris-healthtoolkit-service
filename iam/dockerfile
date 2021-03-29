@@ -1,0 +1,6 @@
+FROM intersystems/iam:1.5.0.9-4
+
+COPY ./plugins /custom/plugins
+
+RUN cd /custom/plugins/kong-plugin-reskeymod && luarocks make
+RUN cd /custom/plugins/kong-plugin-helloworld  && luarocks make

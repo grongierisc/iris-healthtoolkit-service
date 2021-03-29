@@ -13,7 +13,10 @@ services:
     volumes:
       - ./:/irisdev/app
   iam-migrations:
-    image: intersystems/iam:1.5.0.9-4
+    image: intersystems/iam-custom:1.5.0.9-4
+    build: 
+      context: iam
+      dockerfile: dockerfile
     command: kong migrations bootstrap up
     depends_on:
       - db
@@ -29,7 +32,10 @@ services:
     links:
       - db:db
   iam:
-    image: intersystems/iam:1.5.0.9-4
+    image: intersystems/iam-custom:1.5.0.9-4
+    build: 
+      context: iam
+      dockerfile: dockerfile
     depends_on:
       - db
     environment:
@@ -49,10 +55,14 @@ services:
       KONG_PORTAL_GUI_PROTOCOL: http
       KONG_PORTAL_GUI_HOST: '127.0.0.1:8003'
       KONG_ADMIN_GUI_URL: http://localhost:8002
+      KONG_PLUGINS: 'bundled,reskeymod,helloworld'
+      KONG_LUA_PACKAGE_PATH: '/iam/plugins/iam/plugins/kong-plugin-reskeymod/kong/plugins/reskeymod/?.lua;;'
       KONG_ENFORCE_RBAC: 'on'
       KONG_ADMIN_GUI_AUTH: 'basic-auth'
       KONG_ADMIN_GUI_SESSION_CONF: '{"secret":"$IRIS_PASSWORD","storage":"kong","cookie_secure":false}'
       ISC_IRIS_URL: IAM:$IRIS_PASSWORD@iris:52773/api/iam/license
+    volumes: 
+      - ./iam:/iam
     links:
       - db:db
     ports:
