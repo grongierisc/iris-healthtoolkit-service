@@ -1,4 +1,4 @@
-Class HealthToolKit.HL7Rest Extends Ens.BusinessService
+Class HealthToolKit.HL7Rest Extends EnsLib.HL7.Service.Standard
 {
 
 /// Category to apply to incoming message types to produce a complete DocType specification.<p/>

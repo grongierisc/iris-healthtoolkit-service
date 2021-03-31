@@ -1,0 +1,9 @@
+MSH|^~\&|ISC-TRAKCARE|Ref|APPLICATION|FACILITY|20180919122457||SIU^S12|SIU^S12|6491059097662367z48|P|2.5.1|||AL|NE
+SCH|162_2_1|162_2_1||||NWA^New Appointment^ISC-TrakCare||Outpatient^Outpatient^|1|min|^^^20180919140000^20180919140100|464264254^BRIAN^BRUNACINI^^^^^^^^^^Provider||||va^^^^^^^^||||va^^^^^^^^||USRM^^^^^^^^VAMC Dallas VA Medical Center^^|||BOOKED||
+PID|1||RN000000082^^^ISC-Referral&&ISO^MRN~177981063^^^&^CHINHS||EAGLEMAN^Clint^^^^^L||19920605|M|||7728 Bukowski Rd^^CHARLESTOWN^RI^02813^^P||1501731578^PRN^PH^^^^^^P~^NET^Internet^Clint.Eagleman69@va.gov^^^^^"||^^|^^|^^||||||USA^United States^|||||||N|||20180621081700|USRM^^ISO
+PV1|1|O|^^^|O|||||||||||||||OP000000063^^^^VN|||||||||||||||||||||||||20180709093700|
+RGS|1|U
+AIS|1|U|^Initial outpatient evaluation and treatment for the referred condition|20180919140000|||1|min
+AIG|1||464264254^BRIAN BRUNACINI^|Provider^Provider Desc
+AIL|1|A|555555^^^^^^^^Alfond Center for Health|555555^Alfond Center for Health^|^^|20180919140000|||1|min||BOOKED
+AIP|1|A|464264254^BRIAN^BRUNACINI^^^^^^ISC-TrakCare^^^^DN|Provider^Provider Desc^||20180919140000|||1|min||BOOKED

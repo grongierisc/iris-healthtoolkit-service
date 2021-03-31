@@ -7,7 +7,7 @@
     "objectscript.conn" :{
       "ns": "HEALTHTOOLKIT",
       "active": true,
-      "username":"_SYSTEM",
+      "username": "_SYSTEM",
       "password": "SYS",
       "docker-compose": {
         "service": "iris",

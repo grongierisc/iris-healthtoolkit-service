@@ -14,7 +14,9 @@ Method OnRequest(pRequest As EnsLib.HL7.Message, Output pResponse As Ens.Respons
 {
 	set tSC = $$$OK
 	try {
-         set tSC = ##class(HS.Gateway.HL7.HL7ToSDA3).GetSDA(pRequest,.tSDA)
+         set tSC = ##class(HealthToolKit.Gateway.HL7.HL7ToSDA3).GetSDA(pRequest,.tSDA)
+		 //set tSC= ##class(HealthToolKit.Hub.Standalone.HL7.HL7ToSDA3).GetSDAContainer(pRequest,.tContainer)
+		 //set tSC = tContainer.ToQuickXMLStream(.tSDA)
          set tSC = ..SendRequestSync(..TargetConfigName,##class(Ens.StreamContainer).%New(tSDA),.pResponse)
 	} catch ex {
 		set tSC = ex.AsStatus()
