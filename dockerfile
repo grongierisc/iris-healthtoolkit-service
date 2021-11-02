@@ -1,4 +1,4 @@
-ARG IMAGE=intersystemsdc/irishealth-community:2020.4.0.524.0-zpm
+ARG IMAGE=intersystemsdc/irishealth-community:2021.1.0.215.3-zpm
 FROM $IMAGE
 
 ARG IRIS_PASSWORD
@@ -20,7 +20,7 @@ RUN iris start IRIS \
 	&& iris session IRIS < /tmp/iris.script \
 	&& iris stop IRIS quietly
 
-RUN cp misc/swagger.yml /usr/irissys/csp/swagger-ui/swagger.yml 
+COPY misc/swagger.yml /usr/irissys/csp/swagger-ui/swagger.yml 
 RUN old=http://localhost:52773/crud/_spec && \
 	new=./swagger.yml && \
 	sed -i "s|$old|$new|g" /usr/irissys/csp/swagger-ui/index.html
