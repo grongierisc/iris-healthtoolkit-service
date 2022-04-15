@@ -6,6 +6,7 @@ services:
       dockerfile: dockerfile
       args: 
         - IRIS_PASSWORD=$IRIS_PASSWORD
+    command: --check-caps false
     restart: always
     env_file: 
       - .env
