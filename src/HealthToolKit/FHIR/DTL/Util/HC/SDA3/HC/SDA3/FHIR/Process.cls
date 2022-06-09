@@ -8,7 +8,7 @@ Include (HS.HC, HS.FHIRServer)
 /// by Target Config Name. Otherwise, if TransmissionMode is "individual", then the individual
 /// resources within the Bundle are each added to separate FHIR request messages and forwarded to
 /// Target Config Name.
-Class HS.FHIR.DTL.Util.HC.SDA3.FHIR.Process Extends (Ens.BusinessProcess, HS.HC.Util.Trace.Helper) [ ClassType = persistent, Inheritance = right ]
+Class HealthToolKit.FHIR.DTL.Util.HC.SDA3.FHIR.Process Extends (Ens.BusinessProcess, HS.HC.Util.Trace.Helper) [ ClassType = persistent, Inheritance = right ]
 {
 
 Parameter HSDEPLOY = 1;

@@ -4,7 +4,7 @@ Include HS.FHIRServer
 /// only be of the configured FHIR version. This business process transforms the FHIR
 /// data into SDA3, forwards the SDA3 stream to a specified business host, receives
 /// the response from the business host, and returns a FHIR response.
-Class HS.FHIR.DTL.Util.HC.FHIR.SDA3.Process Extends (Ens.BusinessProcess, HS.HC.Util.Trace.Helper) [ ClassType = persistent, Inheritance = right ]
+Class HealthToolKit.FHIR.DTL.Util.HC.FHIR.SDA3.Process Extends (Ens.BusinessProcess, HS.HC.Util.Trace.Helper) [ ClassType = persistent, Inheritance = right ]
 {
 
 Parameter HSDEPLOY = 1;
