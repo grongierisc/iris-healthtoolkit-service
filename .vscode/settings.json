@@ -1,5 +1,4 @@
 {
-    "python.analysis.autoImportCompletions": true,
     "files.associations": {
     
         "Dockerfile*": "dockerfile",
