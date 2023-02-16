@@ -152,8 +152,9 @@ Method ProcessFHIRInteropRequest(pRequest As HS.FHIRServer.Interop.Request, ByRe
 	Set tSC = ..SendRequestSync(..TargetConfigName, tSDA3XMLMessage, .tSDA3XMLResponse)
 	$$$ThrowOnError(tSC)
 	
-	set pResponse = tSDA3XMLResponse
-	Set pResponse.Response.Status = 200
+	set pResponse.QuickStreamId = tSDA3XMLResponse.QuickStreamId
+	set pResponse.Response.Status = 200
+	set pResponse.ContentType = "text/plain"
 	
 	If ($Get(tQuickStreamId)'="")&&($IsObject($Get(tQuickStream))) Do tQuickStream.Clear()
 	
