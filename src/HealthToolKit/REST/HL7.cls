@@ -38,7 +38,7 @@ ClassMethod hl7() As %Status
 			Set %response.ContentType = ensResponse.ContentType
 			Set %response.CharSet = ensResponse.CharSet
 			Set outputQuickStream = ##class(HS.SDA3.QuickStream).%OpenId(ensResponse.QuickStreamId)
-			w outputQuickStream.Read()
+			d outputQuickStream.OutputToDevice()
 		
 		}
     
