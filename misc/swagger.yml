@@ -22,8 +22,6 @@ paths:
       summary: Convert FHIR bundle to an HL7 ADT
       consumes:
       - application/json+fhir
-      produces:
-      - text/plain
       parameters:
       - in: body
         name: body
@@ -44,8 +42,6 @@ paths:
       summary: Convert FHIR bundle to an HL7 ORU
       consumes:
       - application/json+fhir
-      produces:
-      - text/plain
       parameters:
       - in: body
         name: body
@@ -66,8 +62,6 @@ paths:
       summary: Convert FHIR bundle to an HL7 VXU
       consumes:
       - application/json+fhir
-      produces:
-      - text/plain
       parameters:
       - in: body
         name: body
