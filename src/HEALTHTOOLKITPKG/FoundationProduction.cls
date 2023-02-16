@@ -28,6 +28,7 @@ XData ProductionDefinition
     <Setting Target="Host" Name="FHIRMetadataSet">HL7v40 / Base HL7 Metadata for FHIR R4 (4.0.1)</Setting>
     <Setting Target="Host" Name="TransmissionMode">transaction</Setting>
     <Setting Target="Host" Name="TraceOperations">*FULL*</Setting>
+    <Setting Target="Host" Name="TransformClass">HealthToolKit.FHIR.DTL.Util.API.Transform.SDA3ToFHIR</Setting>
   </Item>
   <Item Name="FHIR_Local_Operation" Category="" ClassName="HS.FHIRServer.Interop.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
