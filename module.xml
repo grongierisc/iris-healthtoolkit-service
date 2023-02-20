@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="health-toolkit.ZPM">
+    <Module>
+      <Name>health-toolkit</Name>
+      <Version>1.0.0</Version>
+      <Packaging>module</Packaging>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="HealthToolKit.PKG"/>
+      <Resource Name="HEALTHTOOLKITPKG.PKG"/>
+      
+       <CSPApplication 
+        Url="/api/cda"
+        DispatchClass="HealthToolKit.REST.CDA"
+        MatchRoles=":%All"
+        PasswordAuthEnabled="0"
+        UnauthenticatedEnabled="1"
+        InbndWebServicesEnabled="1"
+        Recurse="1"
+        UseCookies="2"
+        CookiePath="/api/cda"
+       />
+       <CSPApplication 
+        Url="/api/hl7"
+        DispatchClass="HealthToolKit.REST.HL7"
+        MatchRoles=":%All"
+        PasswordAuthEnabled="0"
+        UnauthenticatedEnabled="1"
+        InbndWebServicesEnabled="1"
+        Recurse="1"
+        UseCookies="2"
+        CookiePath="/api/hl7"
+       />
+       <CSPApplication 
+        Url="/api/custom"
+        DispatchClass="HealthToolKit.REST.Custom"
+        MatchRoles=":%All"
+        PasswordAuthEnabled="0"
+        UnauthenticatedEnabled="1"
+        InbndWebServicesEnabled="1"
+        Recurse="1"
+        UseCookies="2"
+        CookiePath="/api/custom"
+       />
+    <FileCopy Name="misc/HS.SDA3.xsd" Target="${libdir}health-toolkit/"/>
+    <Invoke Class="EnsLib.EDI.XML.SchemaXSD" Method="Import">
+         <Arg>${libdir}/health-toolkit/HS.SDA3.xsd</Arg>
+    </Invoke>
+    
+    <Invoke Class="Ens.Director" Method="SetAutoStart">     
+         <Arg>HEALTHTOOLKITPKG.FoundationProduction</Arg>
+    </Invoke>
+    
+    </Module>
+    
+  </Document>
+</Export>
