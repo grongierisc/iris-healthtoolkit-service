@@ -6,7 +6,7 @@ docker system prune -f
 
 ## build container with no cache
 ```
-docker-compose build --no-cache
+docker-compose build --no-cache --progress=plain
 ```
 
 ## start container
@@ -37,6 +37,14 @@ kill ^%ISCLOG
 kill ^ISCLOG
 
 set ^%ISCLOG=3
+```
 
+## example zpm method invoke
+
+
+<Invoke Class="%EnsembleMgr" Method="EnableNamespace" Phase="Compile" When="Before" CheckStatus="true">
+         <Arg>${namespace}</Arg>
+         <Arg>${verbose}</Arg>
+      </Invoke>
 
 
