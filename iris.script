@@ -7,6 +7,7 @@
     zn "HSLIB"
     // Install a Foundation namespace and change to it
     Do ##class(HS.HC.Util.Installer).InstallFoundation("HEALTHTOOLKIT")
+    Do ##class(HS.Util.Installer.Foundation).Install("HEALTHTOOLKIT")
     zn "HEALTHTOOLKIT"
 
     // Install FHIR repo
