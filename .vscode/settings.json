@@ -12,6 +12,10 @@
       "docker-compose": {
         "service": "iris",
         "internalPort": 52773
+      },
+      "links": {
+        "SQL FHIR Builder": "http://${host}:${port}/csp/fhirsql/index.html",
+        "IRIS SQL Portal": "http://${host}:${port}/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=${ns}"
       }
     },
     "sqltools.connections": [

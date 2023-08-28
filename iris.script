@@ -6,8 +6,9 @@
 
     zn "HSLIB"
     // Install a Foundation namespace and change to it
-    Do ##class(HS.HC.Util.Installer).InstallFoundation("HEALTHTOOLKIT")
+    #; Do ##class(HS.HC.Util.Installer).InstallFoundation("HEALTHTOOLKIT")
     Do ##class(HS.Util.Installer.Foundation).Install("HEALTHTOOLKIT")
+
     zn "HEALTHTOOLKIT"
 
     // Install FHIR repo
@@ -38,8 +39,6 @@
     do ##class(EnsLib.EDI.XML.SchemaXSD).Import("/opt/irisapp/misc/HS.SDA3.xsd",.tCatImported)
 
     ; zpm install openapi class definiton
-    zpm
-    install swagger-ui
-    q
+    zpm "install swagger-ui"
 
-halt
+    halt
