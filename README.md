@@ -7,7 +7,7 @@ Easy to use HL7v2 to FHIR,  CDA to FHIR, FHIR to HL7v2 as a Service.
 The aim of this project is to provide an REST API that can convert easily various health formats.
 Post the desire format in the REST body, get the answer in the new format.
 
-* :fire: Official Version : https://aws.amazon.com/marketplace/pp/prodview-q7ryewpz75cq2 :fire:
+* :fire: Official Version : https://www.intersystems.com/IC-FTS/ :fire:
 
 * :tv: Video : https://youtu.be/lr2B7zSFkds :tv:
 

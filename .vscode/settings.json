@@ -12,6 +12,9 @@
       "docker-compose": {
         "service": "iris",
         "internalPort": 52773
+      },
+      "links": {
+        "IRIS SQL Portal": "http://${host}:${port}/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=${ns}"
       }
     },
     "sqltools.connections": [
