@@ -50,7 +50,7 @@
     <Invoke Class="HealthToolKit.Install" Method="Run">
     </Invoke>
     <FileCopy Name="misc/HS.SDA3.xsd" Target="${libdir}"/>
-    <FileCopy Name="misc/swagger.yml" Target="${cspdir}swagger-ui"/>
+    <FileCopy Name="misc/swagger.yml" Target="${cspdir}swagger-ui/"/>
     <Invoke Class="EnsLib.EDI.XML.SchemaXSD" Method="Import">
          <Arg>${libdir}/HS.SDA3.xsd</Arg>
     </Invoke>
