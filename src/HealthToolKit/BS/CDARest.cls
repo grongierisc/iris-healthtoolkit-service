@@ -5,7 +5,9 @@ Property TargetConfigNames As %String(MAXLEN = 1000) [ InitialExpression = "HL7t
 
 Parameter SETTINGS = "TargetConfigNames:Basic:selector?multiSelect=1&context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId}";
 
-Method OnProcessInput(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject) As %Status
+Method OnProcessInput(
+	pDocIn As %RegisteredObject,
+	Output pDocOut As %RegisteredObject) As %Status
 {
     set status = $$$OK
 
@@ -14,7 +16,9 @@ Method OnProcessInput(pDocIn As %RegisteredObject, Output pDocOut As %Registered
     Quit status
 }
 
-Method CCDA(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject) As %Status
+Method CCDA(
+	pDocIn As %RegisteredObject,
+	Output pDocOut As %RegisteredObject) As %Status
 {
     set status = $$$OK
     set request = pDocIn
@@ -28,7 +32,9 @@ Method CCDA(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject) As
 }
 
 /// Return an array of connections for drawing lines on the config diagram
-ClassMethod OnGetConnections(Output pArray As %String, pItem As Ens.Config.Item)
+ClassMethod OnGetConnections(
+	Output pArray As %String,
+	pItem As Ens.Config.Item)
 {
 	Do ##super(.pArray,pItem)
 	If pItem.GetModifiedSetting("TargetConfigNames",.tValue) {

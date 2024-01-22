@@ -39,7 +39,9 @@ Property TransformClass As %Dictionary.Classname [ InitialExpression = "HS.FHIR.
 /// FHIR Metadata Set. These are defined in HS_FHIRServer.FHIRMetadataSet.
 Property FHIRMetadataSet As %String(MAXLEN = 256);
 
-Method OnRequest(pRequest As %Library.Persistent, Output pResponse As %Library.Persistent) As %Status
+Method OnRequest(
+	pRequest As %Library.Persistent,
+	Output pResponse As %Library.Persistent) As %Status
 {
 	Set tSC = $$$OK
 	
@@ -91,7 +93,9 @@ Method OnInit() As %Status
 /// - pResponse.Response.Status is populated with 200 upon successful completion.
 ///   Otherwise, this method will Throw an error which will be caught by OnRequest()
 ///   and returned as a %Status.
-Method ProcessFHIRInteropRequest(pRequest As HS.FHIRServer.Interop.Request, ByRef pResponse As HS.FHIRServer.Interop.Response) As %Status
+Method ProcessFHIRInteropRequest(
+	pRequest As HS.FHIRServer.Interop.Request,
+	ByRef pResponse As HS.FHIRServer.Interop.Response) As %Status
 {
 	Set tFHIRMetadataSetKey = $ZStrip($Piece(..FHIRMetadataSet, "/", 1), "<>W")
 	
@@ -165,7 +169,9 @@ Method ProcessFHIRInteropRequest(pRequest As HS.FHIRServer.Interop.Request, ByRe
 /// HS.Message.FHIR.Request message input. This method does NOT
 /// provide compatibility with the pre-2020.2 transformation API or
 /// customization mechanisms.
-Method ProcessFHIRRequest(pFHIRRequest As HS.Message.FHIR.Request, Output pFHIRResponse As HS.Message.FHIR.Response) As %Status
+Method ProcessFHIRRequest(
+	pFHIRRequest As HS.Message.FHIR.Request,
+	Output pFHIRResponse As HS.Message.FHIR.Response) As %Status
 {
 	Set tSC = $$$OK
 	

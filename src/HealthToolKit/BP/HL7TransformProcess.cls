@@ -10,7 +10,9 @@ Parameter SETTINGS = "TargetConfigName:Basic:selector?context={Ens.ContextSearch
 Property TargetConfigName As Ens.DataType.ConfigName [ InitialExpression = "HS.FHIR.DTL.Util.HC.SDA3.FHIR.Process" ];
 
 /// Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.
-Method OnRequest(pRequest As EnsLib.HL7.Message, Output pResponse As Ens.Response) As %Status
+Method OnRequest(
+	pRequest As EnsLib.HL7.Message,
+	Output pResponse As Ens.Response) As %Status
 {
 	set tSC = $$$OK
 	try {

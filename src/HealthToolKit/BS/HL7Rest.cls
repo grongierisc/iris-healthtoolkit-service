@@ -22,7 +22,9 @@ Property TargetConfigNames As %String(MAXLEN = 1000) [ InitialExpression = "HL7t
 
 Parameter SETTINGS = "TargetConfigNames:Basic:selector?multiSelect=1&context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId}";
 
-Method OnProcessInput(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject) As %Status
+Method OnProcessInput(
+	pDocIn As %RegisteredObject,
+	Output pDocOut As %RegisteredObject) As %Status
 {
     set status = $$$OK
 
@@ -31,7 +33,9 @@ Method OnProcessInput(pDocIn As %RegisteredObject, Output pDocOut As %Registered
     Quit status
 }
 
-Method Default(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject) As %Status
+Method Default(
+	pDocIn As %RegisteredObject,
+	Output pDocOut As %RegisteredObject) As %Status
 {
     set status = $$$OK
     set request = pDocIn
@@ -50,7 +54,9 @@ Method Default(pDocIn As %RegisteredObject, Output pDocOut As %RegisteredObject)
 }
 
 /// Return an array of connections for drawing lines on the config diagram
-ClassMethod OnGetConnections(Output pArray As %String, pItem As Ens.Config.Item)
+ClassMethod OnGetConnections(
+	Output pArray As %String,
+	pItem As Ens.Config.Item)
 {
 	Do ##super(.pArray,pItem)
 	If pItem.GetModifiedSetting("TargetConfigNames",.tValue) {
@@ -59,7 +65,9 @@ ClassMethod OnGetConnections(Output pArray As %String, pItem As Ens.Config.Item)
 }
 
 /// Return the DocType that this service will assign to this document.
-Method resolveDocType(pDoc As EnsLib.HL7.Message, pMSH As EnsLib.HL7.Segment = {$$$NULLOREF}) As %String
+Method resolveDocType(
+	pDoc As EnsLib.HL7.Message,
+	pMSH As EnsLib.HL7.Segment = {$$$NULLOREF}) As %String
 {
 	Set tDocType=pDoc.DocType, tDefCat=""
 	If ""=tDocType {
@@ -125,7 +133,9 @@ Method resolveDocType(pDoc As EnsLib.HL7.Message, pMSH As EnsLib.HL7.Segment = {
 
 /// Override this method to implement your own custom method for resolving the DocType of an incoming message.
 /// Returning nonzero means you are overriding the framework's standard DocType resolution.
-Method OnResolveDocType(pDoc As EnsLib.EDI.Document, ByRef pDocType As %String) As %Boolean
+Method OnResolveDocType(
+	pDoc As EnsLib.EDI.Document,
+	ByRef pDocType As %String) As %Boolean
 {
 	Quit 0
 }

@@ -13,7 +13,9 @@ Property TargetConfigName As Ens.DataType.ConfigName [ InitialExpression = "HS.F
 Property TransformFile As %String(VALUELIST = ",HS.Gateway.SDA3.SDA3ToHL7.ADTA0N,HS.Gateway.SDA3.SDA3ToHL7.ORUR01,HS.Gateway.SDA3.SDA3ToHL7.VXUV04") [ InitialExpression = "HS.Gateway.SDA3.SDA3ToHL7.ADTA0N" ];
 
 /// Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.
-Method OnRequest(pRequest As HS.Message.XMLMessage, Output pResponse As Ens.Response) As %Status
+Method OnRequest(
+	pRequest As HS.Message.XMLMessage,
+	Output pResponse As Ens.Response) As %Status
 {
 	set tSC = $$$OK
 

@@ -91,7 +91,9 @@ Property FHIRMetadataSet As %String(MAXLEN = 256);
 /// Not applicable when sending to a FHIRServer HTTP Interop host.
 Property FHIREndpoint As %String(MAXLEN = 512);
 
-Method OnRequest(pRequest As Ens.Request, Output pResponse As Ens.Response) As %Status
+Method OnRequest(
+	pRequest As Ens.Request,
+	Output pResponse As Ens.Response) As %Status
 {
 	Set tSC = $$$OK
 	
@@ -162,7 +164,12 @@ Method OnInit() As %Status
 
 /// This is an instance method because it needs to SendSync to a business host and get
 /// the response from the host.
-Method ProcessSDARequest(pSDAStream, pSessionApplication As %String, pSessionId As %String, pPatientResourceId As %String = "", ByRef pResponse As Ens.Response) As %Status
+Method ProcessSDARequest(
+	pSDAStream,
+	pSessionApplication As %String,
+	pSessionId As %String,
+	pPatientResourceId As %String = "",
+	ByRef pResponse As Ens.Response) As %Status
 {
 	Set tSC = $$$OK
 	
@@ -256,7 +263,9 @@ Method ProcessSDARequest(pSDAStream, pSessionApplication As %String, pSessionId 
 	Quit tSC
 }
 
-ClassMethod GetHostAndPort(Output pHost As %String, Output pPort As %String)
+ClassMethod GetHostAndPort(
+	Output pHost As %String,
+	Output pPort As %String)
 {
 	Set pHost = ""
 	Set pPort = ""
@@ -267,7 +276,16 @@ ClassMethod GetHostAndPort(Output pHost As %String, Output pPort As %String)
 
 /// For a given Bundle or Bundle entry, create an HS.Message.FHIR.Request object
 /// and forward it to ..TargetConfigName.
-Method CreateAndSendFHIRMessage(pFHIRObj As %Library.DynamicObject, pSchema As HS.FHIRServer.Schema, pLocalHostAndPort As %String, pContentType As %String, pFormatter As %JSON.Formatter, pIndentChars As %String, pLineTerminator As %String, pSessionApplication As %String, pSessionId As %String)
+Method CreateAndSendFHIRMessage(
+	pFHIRObj As %Library.DynamicObject,
+	pSchema As HS.FHIRServer.Schema,
+	pLocalHostAndPort As %String,
+	pContentType As %String,
+	pFormatter As %JSON.Formatter,
+	pIndentChars As %String,
+	pLineTerminator As %String,
+	pSessionApplication As %String,
+	pSessionId As %String)
 {
 	Set tSC = $$$OK
 	
@@ -360,7 +378,16 @@ Method CreateAndSendFHIRMessage(pFHIRObj As %Library.DynamicObject, pSchema As H
 
 /// For a given Bundle or Bundle entry, create an HS.FHIRServer.Interop.Request object
 /// and forward it to ..TargetConfigName.
-Method CreateAndSendInteropMessage(pFHIRObj As %Library.DynamicObject, pSchema As HS.FHIRServer.Schema, pContentType As %String, pFormatter As %JSON.Formatter, pIndentChars As %String, pLineTerminator As %String, pSessionApplication As %String, pSessionId As %String, ByRef pResponse As Ens.Response)
+Method CreateAndSendInteropMessage(
+	pFHIRObj As %Library.DynamicObject,
+	pSchema As HS.FHIRServer.Schema,
+	pContentType As %String,
+	pFormatter As %JSON.Formatter,
+	pIndentChars As %String,
+	pLineTerminator As %String,
+	pSessionApplication As %String,
+	pSessionId As %String,
+	ByRef pResponse As Ens.Response)
 {
 	Set tSC = $$$OK
 	
@@ -448,7 +475,14 @@ Method CreateAndSendInteropMessage(pFHIRObj As %Library.DynamicObject, pSchema A
 	Quit tSC
 }
 
-ClassMethod GetResourceStream(pResourceObj, pFHIRFormat, pFormatFHIROutput, pSchema, pFormatter, pIndentChars, pLineTerminator) As %Stream.Object
+ClassMethod GetResourceStream(
+	pResourceObj,
+	pFHIRFormat,
+	pFormatFHIROutput,
+	pSchema,
+	pFormatter,
+	pIndentChars,
+	pLineTerminator) As %Stream.Object
 {
 	Set tResourceStream = ##class(%Stream.TmpCharacter).%New()
 	
@@ -468,7 +502,10 @@ ClassMethod GetResourceStream(pResourceObj, pFHIRFormat, pFormatFHIROutput, pSch
 }
 
 /// ProcessFHIRResponse evaluates the FHIR response message and formulates a return status code.
-Method ProcessFHIRResponse(pFHIRResponse As HS.Message.FHIR.Response, ByRef pFHIRSC As %Status, pSchema As HS.FHIRServer.Schema) As %Status
+Method ProcessFHIRResponse(
+	pFHIRResponse As HS.Message.FHIR.Response,
+	ByRef pFHIRSC As %Status,
+	pSchema As HS.FHIRServer.Schema) As %Status
 {
 	Set tSC = $$$OK
 	

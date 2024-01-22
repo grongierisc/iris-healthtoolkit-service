@@ -4,7 +4,9 @@ Class HealthToolKit.FHIR.DTL.Util.API.Transform.SDA3ToFHIR Extends (HS.FHIR.DTL.
 {
 
 /// override TransformContainer to by pass error
-Method TransformContainer(source As HS.SDA3.Container, patientId As %String = "") As HS.FHIR.DTL.Util.API.Transform.SDA3ToFHIR
+Method TransformContainer(
+	source As HS.SDA3.Container,
+	patientId As %String = "") As HS.FHIR.DTL.Util.API.Transform.SDA3ToFHIR
 {
 	if ..%bundle.entry.%Size() > 0 {
 		$$$ThrowStatus($$$ERROR($$$GeneralError, "Multiple Containers cannot be transformed consecutively. This API only supports single patient context."))
