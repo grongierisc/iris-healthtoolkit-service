@@ -3,7 +3,7 @@
   <Document name="health-toolkit.ZPM">
     <Module>
       <Name>health-toolkit</Name>
-      <Version>1.0.0</Version>
+      <Version>1.0.2</Version>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="HealthToolKit.PKG"/>
