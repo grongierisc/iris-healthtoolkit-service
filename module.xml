@@ -8,8 +8,13 @@
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="HealthToolKit.PKG"/>
       <Resource Name="HEALTHTOOLKITPKG.PKG"/>
-      
-       <CSPApplication 
+      <Dependencies>
+        <ModuleReference>
+          <Name>swagger-ui</Name>
+          <Version>1.0.0</Version>
+        </ModuleReference>
+      </Dependencies>
+      <CSPApplication 
         Url="/api/cda"
         DispatchClass="HealthToolKit.REST.CDA"
         MatchRoles=":%All"
@@ -19,8 +24,8 @@
         Recurse="1"
         UseCookies="2"
         CookiePath="/api/cda"
-       />
-       <CSPApplication 
+      />
+      <CSPApplication 
         Url="/api/hl7"
         DispatchClass="HealthToolKit.REST.HL7"
         MatchRoles=":%All"
@@ -30,8 +35,8 @@
         Recurse="1"
         UseCookies="2"
         CookiePath="/api/hl7"
-       />
-       <CSPApplication 
+      />
+      <CSPApplication 
         Url="/api/custom"
         DispatchClass="HealthToolKit.REST.Custom"
         MatchRoles=":%All"
@@ -41,16 +46,19 @@
         Recurse="1"
         UseCookies="2"
         CookiePath="/api/custom"
-       />
-    <FileCopy Name="misc/HS.SDA3.xsd" Target="${libdir}health-toolkit/"/>
-    <Invoke Class="EnsLib.EDI.XML.SchemaXSD" Method="Import">
-         <Arg>${libdir}/health-toolkit/HS.SDA3.xsd</Arg>
+      />
+    <Invoke Class="HealthToolKit.Install" Method="Run">
     </Invoke>
-    
-    <Invoke Class="Ens.Director" Method="SetAutoStart">     
+    <FileCopy Name="misc/HS.SDA3.xsd" Target="${libdir}"/>
+    <FileCopy Name="misc/swagger.yml" Target="${cspdir}swagger-ui"/>
+    <Invoke Class="EnsLib.EDI.XML.SchemaXSD" Method="Import">
+         <Arg>${libdir}/HS.SDA3.xsd</Arg>
+    </Invoke>
+
+    <Invoke Class="Ens.Director" Method="SetAutoStart">
          <Arg>HEALTHTOOLKITPKG.FoundationProduction</Arg>
     </Invoke>
-    
+
     </Module>
     
   </Document>

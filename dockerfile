@@ -1,4 +1,4 @@
-ARG IMAGE=intersystemsdc/irishealth-community:latest
+ARG IMAGE=intersystemsdc/irishealth-community:preview
 FROM $IMAGE as builder
 
 ARG IRIS_PASSWORD
@@ -18,7 +18,6 @@ RUN iris start IRIS \
 	&& iris session IRIS < /tmp/iris.script \
 	&& iris stop IRIS quietly
 
-COPY misc/swagger.yml /usr/irissys/csp/swagger-ui/swagger.yml 
 RUN old=http://localhost:52773/crud/_spec && \
 	new=./swagger.yml && \
 	sed -i "s|$old|$new|g" /usr/irissys/csp/swagger-ui/index.html
